@@ -1,0 +1,349 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Маленькое признание ❤️</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow: hidden;
+  font-family: Georgia, "Times New Roman", serif;
+  color: #fff;
+  background: radial-gradient(
+    circle at 50% 20%,
+    #6d214b 0,
+    #32132f 42%,
+    #120d24 100%
+  );
+  display: grid;
+  place-items: center;
+}
+
+.glow {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 77, 139, 0.18),
+    transparent 55%
+  );
+  pointer-events: none;
+}
+
+.stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  color: #ffd9e8;
+  opacity: 0.7;
+  animation: twinkle 2.5s infinite alternate;
+}
+
+@keyframes twinkle {
+  to {
+    opacity: 0.15;
+    transform: scale(0.65);
+  }
+}
+
+.card {
+  position: relative;
+  width: min(90vw, 520px);
+  max-height: 92vh;
+  overflow-y: auto;
+  padding: 36px 24px 30px;
+  text-align: center;
+  border: 1px solid rgba(255, 210, 230, 0.3);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.075);
+  box-shadow: 0 20px 80px #09061480;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 2;
+}
+
+h1 {
+  font-size: clamp(28px, 7vw, 42px);
+  font-weight: normal;
+  margin: 0 0 12px;
+}
+
+.sub {
+  color: #f7c9dc;
+  font-size: 17px;
+  line-height: 1.5;
+  margin: 0 auto 25px;
+  max-width: 360px;
+}
+
+.heart-wrap {
+  height: 180px;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.heart {
+  font-size: 110px;
+  line-height: 1;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  filter: drop-shadow(0 0 18px #ff3c88aa);
+  animation: beat 1.2s infinite;
+}
+
+.heart:hover {
+  animation-play-state: paused;
+  transform: scale(1.12);
+}
+
+@keyframes beat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.1); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.07); }
+}
+
+button:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 5px;
+}
+
+.hint {
+  font-size: 13px;
+  color: #eabbd0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.message {
+  display: none;
+}
+
+.message.show {
+  display: block;
+  animation: rise 0.9s ease both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.love-note {
+  font-size: clamp(20px, 5vw, 26px);
+  line-height: 1.5;
+  color: #fff0f6;
+}
+
+.signature {
+  margin-top: 18px;
+  color: #ffb5d0;
+  font-style: italic;
+}
+
+.again {
+  margin-top: 20px;
+  border: 1px solid #ffc1d8;
+  background: #ffffff12;
+  color: #fff;
+  border-radius: 999px;
+  padding: 10px 18px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.again:hover {
+  background: #ffffff25;
+}
+
+.float-heart {
+  position: fixed;
+  bottom: -50px;
+  z-index: 1;
+  pointer-events: none;
+  animation: floatUp linear forwards;
+  opacity: 0.9;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-115vh) rotate(25deg);
+    opacity: 0;
+  }
+}
+
+.petal {
+  position: fixed;
+  top: -30px;
+  z-index: 1;
+  pointer-events: none;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(650deg);
+    opacity: 0.1;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 28px 18px 24px;
+  }
+
+  .heart-wrap {
+    height: 150px;
+  }
+
+  .heart {
+    font-size: 95px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="glow"></div>
+<div class="stars" id="stars"></div>
+
+<main class="card">
+  <div id="intro">
+    <h1>Для кого-то особенного…</h1>
+
+    <p class="sub">
+      Иногда одно маленькое прикосновение может открыть
+      целую вселенную чувств.
+    </p>
+
+    <div class="heart-wrap">
+      <button
+        class="heart"
+        id="heart"
+        aria-label="Открыть любовное послание"
+      >❤️</button>
+    </div>
+
+    <div class="hint">нажми на сердце</div>
+  </div>
+
+  <section
+    class="message"
+    id="message"
+    aria-live="polite"
+    aria-hidden="true"
+  >
+    <h1>Ты — моё маленькое чудо ✨</h1>
+
+    <p class="love-note">
+      Если бы каждый удар сердца превращался в звезду,
+      я бы подарил тебе целое небо. А если бы каждый миг
+      рядом с тобой был цветком — у нас был бы вечный
+      сад любви. 💗
+    </p>
+
+    <div class="signature">
+      Пусть это мгновение будет только нашим.
+    </div>
+
+    <button class="again" id="again" type="button">
+      Ещё раз ❤️
+    </button>
+  </section>
+</main>
+
+<script>
+const stars = document.getElementById("stars");
+const intro = document.getElementById("intro");
+const message = document.getElementById("message");
+const heartButton = document.getElementById("heart");
+const againButton = document.getElementById("again");
+
+const symbols = ["💗", "💕", "💖", "✨", "🌸", "❤️"];
+
+// Создаём звёзды на фоне.
+for (let i = 0; i < 55; i++) {
+  const star = document.createElement("span");
+
+  star.className = "star";
+  star.textContent = "✦";
+  star.style.left = Math.random() * 100 + "%";
+  star.style.top = Math.random() * 100 + "%";
+  star.style.fontSize = (8 + Math.random() * 12) + "px";
+  star.style.animationDelay = Math.random() * 3 + "s";
+
+  stars.appendChild(star);
+}
+
+// Создаём летящие сердечки и лепестки.
+function burst() {
+  for (let i = 0; i < 38; i++) {
+    const particle = document.createElement("span");
+
+    particle.className =
+      Math.random() > 0.3 ? "float-heart" : "petal";
+
+    particle.textContent =
+      symbols[Math.floor(Math.random() * symbols.length)];
+
+    particle.style.left = Math.random() * 100 + "vw";
+    particle.style.fontSize = (14 + Math.random() * 24) + "px";
+    particle.style.animationDuration = (3 + Math.random() * 4) + "s";
+
+    document.body.appendChild(particle);
+
+    particle.addEventListener("animationend", () => {
+      particle.remove();
+    }, { once: true });
+  }
+}
+
+// Открываем признание.
+heartButton.addEventListener("click", () => {
+  intro.style.display = "none";
+  message.classList.add("show");
+  message.setAttribute("aria-hidden", "false");
+
+  burst();
+});
+
+// Возвращаем начальный экран.
+againButton.addEventListener("click", () => {
+  message.classList.remove("show");
+  message.setAttribute("aria-hidden", "true");
+  intro.style.display = "block";
+});
+</script>
+</body>
+</html>
+```
